@@ -1,6 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz";
+    #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz";
+    nixpkgs.url = "github:PedroHLC/nixpkgs/elm-graphql-init";
     devenv = {
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,11 +32,11 @@
         devShells.default = devShells.elm;
         devShells.elm = devenv.lib.mkShell {
           inherit inputs pkgs;
-          modules = [ ./elm.nix ];
+          modules = [ ./common.nix ./elm.nix ./enable.nix ];
         };
         devShells.elm-pages = devenv.lib.mkShell {
           inherit inputs pkgs;
-          modules = [ ./elm-pages.nix ];
+          modules = [ ./common.nix ./elm-pages.nix ./enable.nix ];
         };
         packages.devenv-up = devShells.elm.config.procfileScript;
         packages.devenv-pages-up = devShells.elm-pages.config.procfileScript;
