@@ -31,11 +31,11 @@
         devShells.default = devShells.elm;
         devShells.elm = devenv.lib.mkShell {
           inherit inputs pkgs;
-          modules = [ ./elm.nix ];
+          modules = [ ./common.nix ./elm.nix ./enable.nix ];
         };
         devShells.elm-pages = devenv.lib.mkShell {
           inherit inputs pkgs;
-          modules = [ ./elm-pages.nix ];
+          modules = [ ./common.nix ./elm-pages.nix ./enable.nix ];
         };
         packages.devenv-up = devShells.elm.config.procfileScript;
         packages.devenv-pages-up = devShells.elm-pages.config.procfileScript;
