@@ -38,7 +38,7 @@
           toString (pkgs.writeShellScript "env-elm-review" ''
             exec ${binReview} \
               --template ${lib.strings.escapeShellArg reviewTemplate} \
-              $(cat \"$DEVENV_ROOT/.elm-review\" || true);
+              $(cat "''${DEVENV_ROOT:-.}/.elm-review" || true);
           '');
       };
     };
