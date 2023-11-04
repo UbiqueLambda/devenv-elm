@@ -15,11 +15,11 @@ If using elm-pages, then replace `#elm` with `#elm-pages`.
 
 You'll find the following scripts in `$PATH` to help you:
 
-- `env-dry-build`
 - `env-build`
-- `env-lint`
-- `env-fmt`
 - `env-ci`
+- `env-dry-build`
+- `env-fmt`
+- `env-lint` (which calls `env-elm-review`)
 - `env-up`
 
 ## Notes

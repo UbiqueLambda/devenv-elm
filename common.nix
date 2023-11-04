@@ -32,23 +32,31 @@
         type = lib.types.str;
         default = "UbiqueLambda/elm-review-config";
       };
-      reviewCmd = mkOption {
-        type = lib.types.str;
+      reviewScript = mkOption {
+        type = lib.types.package;
         default = with config.languages.elm;
-          toString (pkgs.writeShellScript "env-elm-review" ''
+          pkgs.writeShellScriptBin "env-elm-review" ''
             exec ${binReview} \
               --template ${lib.strings.escapeShellArg reviewTemplate} \
-              $(cat "''${DEVENV_ROOT:-.}/.elm-review" || true);
-          '');
+              $(cat "''${DEVENV_ROOT:-.}/.elm-review" || true) \
+              "$@"
+          '';
+      };
+      reviewCmd = mkOption {
+        type = lib.types.str;
+        default = "${config.languages.elm.reviewScript}/bin/env-elm-review";
       };
     };
   };
-  config = with config.languages.elm; with lib; {
+  config = with config.languages.elm; {
     processes = {
       reactor.exec = "${binElm} reactor";
     };
 
-    packages = with pkgs; [ elmPackages.elm-graphql ];
+    packages = with pkgs; [
+      elmPackages.elm-graphql
+      reviewScript
+    ];
 
     pre-commit = {
       hooks = {
