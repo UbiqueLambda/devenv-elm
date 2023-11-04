@@ -35,11 +35,11 @@
       reviewCmd = mkOption {
         type = lib.types.str;
         default = with config.languages.elm;
-          toString pkgs.writeShellScript "env-elm-review" ''
+          toString (pkgs.writeShellScript "env-elm-review" ''
             exec ${binReview} \
               --template ${lib.strings.escapeShellArg reviewTemplate} \
               $(cat \"$DEVENV_ROOT/.elm-review\" || true)";
-          '';
+          '');
       };
     };
   };
