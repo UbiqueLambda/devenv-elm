@@ -35,7 +35,11 @@
       reviewCmd = mkOption {
         type = lib.types.str;
         default = with config.languages.elm;
-          "${binReview} --template ${lib.strings.escapeShellArg reviewTemplate}";
+          toString (pkgs.writeShellScript "env-elm-review" ''
+            exec ${binReview} \
+              --template ${lib.strings.escapeShellArg reviewTemplate} \
+              $(cat "''${DEVENV_ROOT:-.}/.elm-review" || true);
+          '');
       };
     };
   };
@@ -61,7 +65,7 @@
         };
         elm-review = {
           enable = true;
-          entry = mkForce "${reviewCmd}";
+          entry = mkForce reviewCmd;
           files = mkForce files;
         };
         nixpkgs-fmt = {
