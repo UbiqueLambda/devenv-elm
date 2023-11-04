@@ -1,2 +1,5 @@
 /.devenv/
+/.sprite-stuff/
 /.pre-commit-config.yaml
+/dist/
+/vectors/

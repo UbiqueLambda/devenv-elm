@@ -89,10 +89,22 @@
       env-dry-build.exec = dryBuild;
       env-lint.exec = "pre-commit run -a";
       env-fmt.exec = ''
-        set -euo pipefail
+        set -eu
         ${binFormat} "$DEVENV_ROOT/src/"
         ${binPrettier} -w "$DEVENV_ROOT"
       '';
+
+      env-gen-sprite.exec = with pkgs; ''
+        set -eu
+        cd "$DEVENV_ROOT"
+        rm -f .sprite-stuff/optimized/*
+        ${nodePackages.svgo}/bin/svgo -f vectors -o .sprite-stuff/optimized
+        export PATH="${nodejs}/bin:$PATH"
+        exec ${nodePackages.npm}/bin/npx svg-sprite \
+          --symbol --symbol-inline  --symbol-example=true \
+          --symbol-dest=dist/ --symbol-sprite=sprite.svg \
+          .sprite-stuff/optimized/*.svg
+      ''; # TODO: Add "svg-sprite" to nixpkgs or NUR
 
       # "devenv ci" does not exists when on flakes...
       env-ci.exec = ''
