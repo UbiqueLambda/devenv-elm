@@ -15,12 +15,13 @@ If using elm-pages, then replace `#elm` with `#elm-pages`.
 
 You'll find the following scripts in `$PATH` to help you:
 
-- `env-build`
-- `env-ci`
-- `env-dry-build`
-- `env-fmt`
+- `env-build` (builds to `dist`)
+- `env-ci` (the executable that the CI should call)
+- `env-dry-build` (builds without outputting any file)
+- `env-fmt` (formats all files with elm-format & prettier)
+- `env-gen-sprite` (builds `dist/sprite.svg` bundling all files in `vectors/*.svg`)
 - `env-lint` (which calls `env-elm-review`)
-- `env-up`
+- `env-up` (runs elm's reactor, or `elm-pages dev`)
 
 ## Notes
 
