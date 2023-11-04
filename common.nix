@@ -55,7 +55,7 @@
           pass_filenames = false;
         };
         elm-review = {
-          #enable = true;
+          enable = true;
           entry = mkForce reviewCmd;
           files = mkForce files;
         };
