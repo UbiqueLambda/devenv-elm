@@ -16,21 +16,26 @@
         type = lib.types.str;
         default = "${pkgs.elmPackages.elm}/bin/elm";
       };
+      binReview = mkOption {
+        type = lib.types.str;
+        default = "${pkgs.elmPackages.elm-review}/bin/elm-review";
+      };
       binFormat = mkOption {
         type = lib.types.str;
         default = config.pre-commit.hooks.elm-format.entry;
-      };
-      binReview = mkOption {
-        type = lib.types.str;
-        default = "${pkgs.elmPackages.elm-review}/bin/elm-review --template UbiqueLambda/elm-review-config";
       };
       binPrettier = mkOption {
         type = lib.types.str;
         default = config.pre-commit.hooks.prettier.entry;
       };
-      reviewCmd = {
+      reviewTemplate = mkOption {
         type = lib.types.str;
-        default = config.pre-commit.hooks.prettier.entry;
+        default = "UbiqueLambda/elm-review-config";
+      };
+      reviewCmd = mkOption {
+        type = lib.types.str;
+        default = with config.languages.elm;
+          "${binReview} --template ${lib.strings.escapeShellArg reviewTemplate}";
       };
     };
   };
@@ -56,7 +61,7 @@
         };
         elm-review = {
           enable = true;
-          entry = mkForce reviewCmd;
+          entry = mkForce "${reviewCmd}";
           files = mkForce files;
         };
         nixpkgs-fmt = {
