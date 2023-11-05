@@ -37,7 +37,7 @@
         default = with config.languages.elm;
           pkgs.writeShellScriptBin "env-elm-review" ''
             exec ${binReview} \
-              --template ${lib.strings.escapeShellArg reviewTemplate} \
+              --template ${lib.strings.escapeShellArg reviewTemplate}''${TEMPLATE_SUFFIX:-#when-wip} \
               $(cat "''${DEVENV_ROOT:-.}/.elm-review" || true) \
               "$@"
           '';
@@ -86,7 +86,11 @@
     };
 
     scripts = {
-      env-dry-build.exec = dryBuild;
+      env-dry-build.exec = ''
+        set -eu
+        cd "$DEVENV_ROOT"
+        exec ${dryBuild}
+      '';
       env-lint.exec = "pre-commit run -a";
       env-fmt.exec = ''
         set -eu
@@ -104,8 +108,6 @@
           --symbol --symbol-inline  --symbol-example=true \
           --symbol-dest=.sprite-stuff/ --symbol-sprite=sprite.svg \
           .sprite-stuff/optimized/*.svg
-        mkdir -p dist
-        cp .sprite-stuff/sprite.svg dist/
       ''; # TODO: Add "svg-sprite" to nixpkgs or NUR
 
       # "devenv ci" does not exists when on flakes...
