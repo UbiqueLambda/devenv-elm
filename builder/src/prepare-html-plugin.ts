@@ -12,10 +12,17 @@ export default (projectPath: string) => ({
       }
 
       // [0] is js' source-map, [2] is css' source-map
-      const jsFile = Object.keys(result.metafile.outputs)[1];
-      const cssFile = Object.keys(result.metafile.outputs)[3];
-      if (!jsFile || !cssFile) {
-        console.error('### Prepare error:', 'Unable to retrieve metafiles');
+      const jsMeta = Object.entries(result.metafile.outputs).find(
+        ([_k, v]) => (v.entryPoint ?? '') == 'web/js/index.js',
+      );
+      if (!jsMeta) {
+        console.error('### Prepare error:', 'Unable to retrieve JS metafile');
+        process.exit(6);
+      }
+      const jsFile = jsMeta[0];
+      const cssFile = jsMeta[1].cssBundle;
+      if (!cssFile) {
+        console.error('### Prepare error:', 'Unable to retrieve CSS filename');
         process.exit(6);
       }
       const jsFinalPath = jsFile.replace('dist/', '/');
