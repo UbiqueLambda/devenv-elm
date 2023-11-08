@@ -1,5 +1,7 @@
 /.devenv/
 /.sprite-stuff/
 /.pre-commit-config.yaml
+/builder/bin/*.js
 /dist/
 /vectors/
+node_modules/
