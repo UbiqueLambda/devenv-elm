@@ -18,7 +18,7 @@ const options = {
   entryPoints: ['web/js/index.js'],
   outdir: 'dist',
   entryNames: '[dir]/[name]-[hash]',
-  assetNames: 'assets/[name]-[hash]',
+  assetNames: 'assets/[name]',
   allowOverwrite: true,
   bundle: true,
   metafile: true,

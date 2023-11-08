@@ -11,7 +11,7 @@ export default (projectPath: string) => ({
         process.exit(5);
       }
 
-      // [0] is js' source-map, [2] is css' source-map
+      // Find the new filenames
       const jsMeta = Object.entries(result.metafile.outputs).find(
         ([_k, v]) => (v.entryPoint ?? '') == 'web/js/index.js',
       );
