@@ -1,0 +1,52 @@
+{
+  "name": "devenv-elm-builder",
+  "version": "0.0.1",
+  "main": "index.tsx",
+  "repository": "https://github.com/UbiqueLambda/devenv-elm",
+  "author": "PedroHLC <root@pedrohlc.com>",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "bin"
+  ],
+  "dependencies": {
+    "archiver": "^6.0.1",
+    "esbuild": "^0.19.5",
+    "esbuild-plugin-elm": "^0.0.12"
+  },
+  "bin": {
+    "env-elmlvl2-wrapper": "bin/elmlvl2-wrapper.sh",
+    "env-elm-start": "bin/serve.js",
+    "env-elm-build": "bin/build.js"
+  },
+  "scripts": {
+    "build": "tsc --pretty -p .",
+    "lint": "eslint src/*.ts --config eslintconfig.json",
+    "fmt": "prettier -w src README.md eslintconfig.json",
+    "tsc": "tsc --noEmit --pretty -p ."
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@tsconfig/recommended": "^1.0.3",
+    "@types/archiver": "^6.0.1",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3",
+    "tsc": "^2.0.4",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "elm": "^0.19.1-6",
+    "elm-optimize-level-2": "^0.3.5"
+  },
+  "engines": {
+    "node": ">=0.20"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}

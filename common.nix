@@ -49,13 +49,11 @@
     };
   };
   config = with config.languages.elm; {
-    processes = {
-      reactor.exec = "${binElm} reactor";
-    };
-
     packages = with pkgs; [
       elmPackages.elm-graphql
+      elmPackages.elm-optimize-level-2
       reviewScript
+      zip
     ];
 
     pre-commit = {

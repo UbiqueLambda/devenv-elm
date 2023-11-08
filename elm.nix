@@ -2,24 +2,22 @@
 # https://devenv.sh/reference/options/
 let
   inherit (config.languages.elm) binElm;
+  builder = pkgs.callPackage ./builder { };
 in
 {
   languages.elm.dryBuild = "${binElm} make src/Main.elm --output=/dev/null";
   languages.elm.files = "^src/.+\\.elm$";
   languages.elm.raiseFlakeOutput = "${self}#devenv-up";
 
+  packages = [
+    builder
+  ];
+
   processes = {
-    reactor.exec = "${binElm} reactor";
+    reactor.exec = "${builder}/bin/env-elm-start";
   };
 
   scripts = {
-    env-build.exec = ''
-      set -euo pipefail
-      mkdir -p ./result
-      cp -r ./assets/* -t ./result
-      rm ./result/index*.js
-      ${binElm} make src/Main.elm --optimize --output=./result/index.js
-      cat ./assets/index.append.js >> ./result/index.js
-    '';
+    env-build.exec = "${builder}/bin/env-elm-build";
   };
 }
