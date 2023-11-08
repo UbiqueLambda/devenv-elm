@@ -29,7 +29,6 @@
     "@tsconfig/node20": "^20.1.2",
     "@tsconfig/recommended": "^1.0.3",
     "@types/archiver": "^6.0.1",
-    "@types/lodash": "^4.14.201",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "eslint": "^8.53.0",

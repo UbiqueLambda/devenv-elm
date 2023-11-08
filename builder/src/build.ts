@@ -27,22 +27,10 @@ esbuild
     });
     archive.pipe(output);
 
-    // Zip files in web/assets
-    const webFilesPath = path.join(projectPath, 'web/assets');
-    const webFiles = fs.readdirSync(webFilesPath);
-    console.log(`Globbing ${webFilesPath}`);
-    webFiles.forEach(function (file) {
-      const src = path.join(projectPath, 'web/assets', file);
-      console.log(`Adding ${src}`);
-      archive.append(fs.createReadStream(src), {
-        name: path.join('assets', file),
-      });
-    });
-
     // ZIP files in dist
     const distFilesPath = path.join(projectPath, 'dist');
     const distFiles = fs.readdirSync(distFilesPath);
-    console.log(`Globbing ${webFilesPath}`);
+    console.log(`Globbing ${distFilesPath}`);
     distFiles.forEach(function (file) {
       if (file.endsWith('.map')) return;
       const src = path.join(projectPath, 'dist', file);

@@ -5,3 +5,4 @@
 /dist/
 /vectors/
 node_modules/
+yarn-error.log
