@@ -39,4 +39,7 @@ async function main() {
     .listen(1234);
 }
 
-main();
+main().catch((error) => {
+  console.error('### Serve error:', error);
+  process.exit(-1);
+});

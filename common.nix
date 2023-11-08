@@ -51,6 +51,7 @@
   config = with config.languages.elm; {
     packages = with pkgs; [
       elmPackages.elm-graphql
+      elmPackages.elm-optimize-level-2
       reviewScript
       zip
     ];

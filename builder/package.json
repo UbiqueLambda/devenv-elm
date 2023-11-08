@@ -12,8 +12,7 @@
   "dependencies": {
     "archiver": "^6.0.1",
     "esbuild": "^0.19.5",
-    "esbuild-plugin-elm": "^0.0.12",
-    "lodash": "^4.17.21"
+    "esbuild-plugin-elm": "^0.0.12"
   },
   "bin": {
     "env-elmlvl2-wrapper": "bin/elmlvl2-wrapper.sh",
@@ -21,9 +20,10 @@
     "env-elm-build": "bin/build.js"
   },
   "scripts": {
-    "tsc": "tsc --noEmit --pretty -p .",
     "build": "tsc --pretty -p .",
-    "fmt": "prettier -w src README.md eslintconfig.json"
+    "lint": "eslint src/*.ts --config eslintconfig.json",
+    "fmt": "prettier -w src README.md eslintconfig.json",
+    "tsc": "tsc --noEmit --pretty -p ."
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.2",

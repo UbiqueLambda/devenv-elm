@@ -1,10 +1,9 @@
-import path from 'path';
 import EnvPlugin, { getGitDescribe } from './env-plugin';
 import PrepareHtmlPlugin from './prepare-html-plugin';
 import ElmPlugin from 'esbuild-plugin-elm';
 
 const projectPath = process.env.DEVENV_ROOT ?? process.cwd();
-const gitDescribe = getGitDescribe();
+const _gitDescribe = getGitDescribe();
 
 // Update it here and "src/env.ts"
 const environment = process.env.APP_ENV ?? 'development';
@@ -20,7 +19,7 @@ const options = {
   minify: environment === 'production',
   sourcemap: true,
   plugins: [
-    EnvPlugin(gitDescribe),
+    EnvPlugin(),
     ElmPlugin({ pathToElm: 'env-elmlvl2-wrapper' }),
     PrepareHtmlPlugin(projectPath),
   ],

@@ -5,7 +5,7 @@ mkYarnPackage {
   src = ./.;
   offlineCache = fetchYarnDeps {
     yarnLock = ./yarn.lock;
-    hash = "sha256-5/+xcgSIOTaxNQXqphWgzQ1DUmHGZG06LUprVj/xDBI=";
+    hash = "sha256-/A8yL6BiiVz1a068VToq4PhTQjwqfkifeYckuN7A6qw=";
   };
   buildPhase = ''
     export HOME=$(mktemp -d)
