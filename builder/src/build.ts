@@ -29,14 +29,7 @@ esbuild
 
     // ZIP files in dist
     const distFilesPath = path.join(projectPath, 'dist');
-    const distFiles = fs.readdirSync(distFilesPath);
-    console.log(`Globbing ${distFilesPath}`);
-    distFiles.forEach(function (file) {
-      if (file.endsWith('.map')) return;
-      const src = path.join(projectPath, 'dist', file);
-      console.log(`Adding ${src}`);
-      archive.append(fs.createReadStream(src), { name: file });
-    });
+    archive.directory(distFilesPath, '.');
 
     // Write ending to zip file
     console.log('Nothing left to loose.');
