@@ -8,7 +8,6 @@ const _gitDescribe = getGitDescribe(); // Adds it (when missing) to GIT_DESCRIBE
 const environment = process.env.APP_ENV ?? 'development';
 
 const loader: { [ext: string]: Loader } = { '.svg': 'text' };
-
 const options = {
   target: ['es2021'],
   entryPoints: ['web/js/index.js'],

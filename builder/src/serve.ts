@@ -21,7 +21,8 @@ async function main() {
         };
 
         const proxyReq = http.request(options, (proxyRes) => {
-          if (!path || path === '/') {
+          console.log('From', path);
+          if (proxyRes.statusCode === 404) {
             console.log('Redirecting', path);
             return forwardRequest('/index.html');
           } else {
