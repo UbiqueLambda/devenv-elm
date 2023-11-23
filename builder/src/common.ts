@@ -27,7 +27,11 @@ const options = {
   loader,
   plugins: [
     EnvPlugin(),
-    ElmPlugin({ pathToElm: 'env-elmlvl2-wrapper' }),
+    ElmPlugin(
+      environment !== 'development'
+        ? { pathToElm: 'env-elmlvl2-wrapper' }
+        : { debug: true },
+    ),
     PrepareHtmlPlugin(projectPath),
   ],
 };
