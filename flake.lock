@@ -10,11 +10,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1698243190,
-        "narHash": "sha256-n+SbyNQRhUcaZoU00d+7wi17HJpw/kAUrXOL4zRcqE8=",
+        "lastModified": 1700691772,
+        "narHash": "sha256-LidI1PVpxL5/WchIRfMszzsiA5t40QyJiU8V/vd4ZZE=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "86f476f7edb86159fd20764489ab4e4df6edb4b6",
+        "rev": "38302f4b9ff45915151848b719c5c4127946c1b8",
         "type": "github"
       },
       "original": {
@@ -134,12 +134,12 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1698611440,
-        "narHash": "sha256-jPjHjrerhYDy3q9+s5EAsuhyhuknNfowY6yt6pjn9pc=",
-        "rev": "0cbe9f69c234a7700596e943bfae7ef27a31b735",
-        "revCount": 542330,
+        "lastModified": 1700612854,
+        "narHash": "sha256-yrQ8osMD+vDLGFX7pcwsY/Qr5PUd6OmDMYJZzZi0+zc=",
+        "rev": "19cbff58383a4ae384dea4d1d0c823d72b49d614",
+        "revCount": 551719,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.1.542330%2Brev-0cbe9f69c234a7700596e943bfae7ef27a31b735/018b84f1-327c-75e1-b0f9-1e9e4cd82b77/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.1.551719%2Brev-19cbff58383a4ae384dea4d1d0c823d72b49d614/018bfdb3-08a8-7c17-b64e-5653b6d4c279/source.tar.gz"
       },
       "original": {
         "type": "tarball",
