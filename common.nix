@@ -119,6 +119,7 @@
       # "devenv up" does not work when on flakes...
       env-up.exec = ''
         set -euo pipefail
+        cd "$DEVENV_ROOT"
         procfilescript=$(nix build "${raiseFlakeOutput}" --no-link --print-out-paths --accept-flake-config --impure)
         exec "$procfilescript" "$@"
       '';
