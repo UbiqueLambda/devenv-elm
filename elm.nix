@@ -14,10 +14,14 @@ in
   ];
 
   processes = {
-    reactor.exec = "${builder}/bin/env-elm-start";
+    reactor.exec = ''
+      exec ${builder}/bin/env-elm-start "$@"
+    '';
   };
 
   scripts = {
-    env-build.exec = "${builder}/bin/env-elm-build";
+    env-build.exec = ''
+      exec ${builder}/bin/env-elm-build "$@"
+    '';
   };
 }

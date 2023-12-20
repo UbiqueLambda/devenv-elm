@@ -20,6 +20,10 @@
         type = lib.types.str;
         default = "${pkgs.elmPackages.elm-review}/bin/elm-review";
       };
+      binSchema = mkOption {
+        type = lib.types.str;
+        default = "${pkgs.elmPackages.elm-graphql}/bin/elm-graphql";
+      };
       binFormat = mkOption {
         type = lib.types.str;
         default = config.pre-commit.hooks.elm-format.entry;
@@ -50,7 +54,6 @@
   };
   config = with config.languages.elm; {
     packages = with pkgs; [
-      elmPackages.elm-graphql
       elmPackages.elm-optimize-level-2
       reviewScript
       zip
@@ -87,13 +90,17 @@
       env-dry-build.exec = ''
         set -eu
         cd "$DEVENV_ROOT"
-        exec ${dryBuild}
+        exec ${dryBuild} "$@"
       '';
-      env-lint.exec = "pre-commit run -a";
+
+      env-lint.exec = ''
+        exec pre-commit run -a "$@"
+      '';
+
       env-fmt.exec = ''
         set -eu
         ${binFormat} "$DEVENV_ROOT/src/"
-        ${binPrettier} -w "$DEVENV_ROOT"
+        exec ${binPrettier} -w "$DEVENV_ROOT"
       '';
 
       env-gen-sprite.exec = with pkgs; ''
@@ -105,8 +112,19 @@
         exec ${nodePackages.npm}/bin/npx svg-sprite \
           --symbol --symbol-inline  --symbol-example=true \
           --symbol-dest=.sprite-stuff/ --symbol-sprite=sprite.svg \
-          .sprite-stuff/optimized/*.svg
+          "$@" .sprite-stuff/optimized/*.svg
       ''; # TODO: Add "svg-sprite" to nixpkgs or NUR
+
+      env-gen-schema.exec = ''
+        set -eu
+        cd "$DEVENV_ROOT"
+        [ -e .env-config ] && source .env-config
+        exec ${binSchema} \
+          --schema-file "''${SCHEMA_FILE:-../schemas/schema.graphql}" \
+          --base "''${SCHEMA_ELM_NS:-Schema.Internals}" \
+          --scalar-codecs "''${SCHEMA_ELM_SCALAR:-Schema.ScalarCodecs}" \
+          "$@"
+      '';
 
       # "devenv ci" does not exists when on flakes...
       env-ci.exec = ''
@@ -114,8 +132,9 @@
         echo "Commit: $GITHUB_SHA"
         echo "Directory: $DEVENV_ROOT"
         [ -f "$DEVENV_ROOT/elm.json" ] || echo "elm.json is not present"
-        pre-commit run --from-ref origin/main --to-ref $GITHUB_SHA
+        exec pre-commit run --from-ref origin/main --to-ref "$GITHUB_SHA" "$@"
       '';
+
       # "devenv up" does not work when on flakes...
       env-up.exec = ''
         set -euo pipefail

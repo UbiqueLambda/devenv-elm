@@ -11,10 +11,14 @@ in
   packages = with pkgs; [ elmPackages.elm-pages ];
 
   processes = {
-    dev.exec = "${binPages} dev --base \"$DEVENV_ROOT\"";
+    dev.exec = ''
+      exec ${binPages} dev --base \"$DEVENV_ROOT\" "$@"
+    '';
   };
 
   scripts = {
-    env-build.exec = "${binPages} build --base \"$DEVENV_ROOT\"";
+    env-build.exec = ''
+      exec ${binPages} build --base \"$DEVENV_ROOT\" "$@"
+    '';
   };
 }

@@ -47,7 +47,7 @@ jobs:
       - name: Run "devenv ci"
         run: |
           nix develop \
-            'https://flakehub.com/f/UbiqueLambda/devenv-elm/0.1.14.tar.gz#elm' --impure --accept-flake-config \
+            'https://flakehub.com/f/UbiqueLambda/devenv-elm/0.1.18.tar.gz#elm' --impure --accept-flake-config \
             --command env-ci
 ```
 
