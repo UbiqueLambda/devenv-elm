@@ -26,11 +26,11 @@
       };
       binFormat = mkOption {
         type = lib.types.str;
-        default = config.pre-commit.hooks.elm-format.entry;
+        default = config.git-hooks.hooks.elm-format.entry;
       };
       binPrettier = mkOption {
         type = lib.types.str;
-        default = config.pre-commit.hooks.prettier.entry;
+        default = config.git-hooks.hooks.prettier.entry;
       };
       reviewTemplate = mkOption {
         type = lib.types.str;
@@ -59,7 +59,7 @@
       zip
     ];
 
-    pre-commit = {
+    git-hooks = {
       hooks = {
         actionlint.enable = true;
         elm-format = {
@@ -81,9 +81,11 @@
           enable = true;
           files = mkForce "^.+\\.nix$";
         };
-        prettier.enable = true;
+        prettier = {
+          enable = true;
+          settings.write = false;
+        };
       };
-      settings.prettier.write = false;
     };
 
     scripts = {

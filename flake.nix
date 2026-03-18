@@ -1,10 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz";
-    devenv = {
-      url = "github:cachix/devenv";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.follows = "devenv/nixpkgs";
+    devenv.url = "github:cachix/devenv";
     systems.url = "github:nix-systems/default-linux";
     yafas = {
       url = "https://flakehub.com/f/UbiqueLambda/yafas/0.1.0.tar.gz";
